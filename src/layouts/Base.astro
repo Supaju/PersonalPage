@@ -1,0 +1,36 @@
+---
+import '../styles/global.css';
+interface Props { title: string; description?: string }
+const { title, description = 'Portfolio of Your Name: backend, cloud and full-stack engineer.' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href={canonical}>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="sitemap" href="/sitemap-index.xml">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content={canonical}>
+  <script is:inline>
+    try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}
+  </script>
+</head>
+<body>
+  <slot />
+  <script>
+    // scroll-in animation; content stays visible without JS via the noscript rule below
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }), { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+  </script>
+  <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
+</body>
+</html>

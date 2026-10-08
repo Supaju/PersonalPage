@@ -1,0 +1,12 @@
+<button id="theme" aria-label="Toggle light/dark theme">◐</button>
+<script>
+  document.getElementById('theme')!.addEventListener('click', () => {
+    const d = document.documentElement;
+    const dark = d.dataset.theme
+      ? d.dataset.theme === 'dark'
+      : matchMedia('(prefers-color-scheme:dark)').matches;
+    const next = dark ? 'light' : 'dark';
+    d.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch {}
+  });
+</script>

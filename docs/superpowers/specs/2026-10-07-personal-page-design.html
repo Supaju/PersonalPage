@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Personal Portfolio Site - Design Spec</title>
+<style>
+  body{font:16px/1.6 system-ui,sans-serif;max-width:760px;margin:2rem auto;padding:0 1rem;color:#1a1a1a}
+  h1{font-size:1.8rem;margin-bottom:.2rem} h2{margin-top:2rem;border-bottom:1px solid #ddd;padding-bottom:.2rem;color:#1d4ed8}
+  code{background:#f2f4f8;padding:.1em .35em;border-radius:4px} pre{background:#f2f4f8;padding:1rem;border-radius:6px;overflow-x:auto}
+  .meta{color:#666;font-size:.9rem} table{border-collapse:collapse;width:100%} td,th{border:1px solid #ddd;padding:.4rem .6rem;text-align:left}
+</style>
+</head>
+<body>
+<h1>Personal Portfolio Site - Design Spec</h1>
+<p class="meta">2026-10-07 &middot; Status: draft for review</p>
+
+<h2>1. Purpose</h2>
+<p>A personal site that advertises the owner as a backend/systems/cloud and full-stack developer. Audiences: employers and interviewers (primary), plus prospective freelance clients (secondary, served by the general portfolio, with no dedicated freelance section). The site is itself a portfolio piece and will be shared in interviews.</p>
+<p><b>Success:</b> a visitor sees who the owner is, what they have built, and how to reach them within one screen of scrolling.</p>
+
+<h2>2. Decisions</h2>
+<table>
+<tr><th>Area</th><th>Decision</th></tr>
+<tr><td>Stack</td><td>Astro, static output, no client framework. Content as Markdown via content collections.</td></tr>
+<tr><td>Layout</td><td>Hybrid: single-page home plus detail pages for projects and case studies.</td></tr>
+<tr><td>Style</td><td>Clean minimal. Off-white/white, blue accent, large type, whitespace.</td></tr>
+<tr><td>Extras</td><td>Light/dark toggle (follows system, manual override), subtle animations (respect <code>prefers-reduced-motion</code>), project filter by tech.</td></tr>
+<tr><td>Contact</td><td>Email (<code>mailto:</code>), LinkedIn, GitHub. No form.</td></tr>
+<tr><td>Hosting</td><td>Free static host on a free subdomain (e.g. GitHub Pages or Cloudflare Pages). Custom domain later.</td></tr>
+<tr><td>Content</td><td>Placeholders (name, tagline, sample projects/case studies). Owner fills in later.</td></tr>
+</table>
+
+<h2>3. Pages</h2>
+<ul>
+<li><code>/</code> Home: hero (name, tagline, Email/GitHub/LinkedIn/R&eacute;sum&eacute; buttons), featured projects with tech filter, work summary, about blurb, contact footer.</li>
+<li><code>/projects/&lt;slug&gt;</code> Project detail: summary, role, tech list, what was hard, live demo link, GitHub link.</li>
+<li><code>/work/&lt;slug&gt;</code> Anonymized case study: problem, role, tech, approach, impact. No employer secrets.</li>
+<li>About and r&eacute;sum&eacute;: a section on Home with a PDF download (<code>public/resume.pdf</code>).</li>
+</ul>
+
+<h2>4. Structure</h2>
+<pre>src/
+  content/
+    projects/*.md     frontmatter: title, summary, tech[], demo?, repo?, featured, order
+    work/*.md         frontmatter: title, role, period, tech[], summary
+  components/         Header, Hero, ProjectCard, TechFilter, ThemeToggle, Footer
+  layouts/Base.astro  html shell, meta/OG tags, theme init
+  pages/
+    index.astro
+    projects/[slug].astro
+    work/[slug].astro
+  styles/global.css   CSS variables for light/dark, accent, type scale
+public/resume.pdf, favicon</pre>
+
+<h2>5. Behavior</h2>
+<ul>
+<li><b>Theme:</b> CSS variables; inline script in <code>&lt;head&gt;</code> sets <code>data-theme</code> from localStorage or system preference to avoid flash. Toggle persists the choice.</li>
+<li><b>Tech filter:</b> a few lines of vanilla JS toggling <code>hidden</code> on cards by <code>data-tech</code>. Without JS all cards show.</li>
+<li><b>Animations:</b> CSS-only fade/translate on scroll-in and hover, disabled under reduced motion.</li>
+<li><b>Content errors:</b> Astro content-collection schemas (zod) fail the build on missing or invalid frontmatter.</li>
+</ul>
+
+<h2>6. Non-functional</h2>
+<ul>
+<li>Responsive from phone width; semantic HTML, visible focus states, AA contrast in both themes, alt text on images.</li>
+<li>Target Lighthouse 95+ in all categories; no third-party scripts.</li>
+<li>SEO basics: title, description, Open Graph tags, sitemap.</li>
+</ul>
+
+<h2>7. Testing</h2>
+<p>Verification is <code>astro build</code> (schema checks) plus a manual pass on Home and one detail page in light/dark at phone and desktop widths. No test framework; revisit if interactive logic grows.</p>
+
+<h2>8. Out of scope</h2>
+<p>Blog, contact form, CMS, freelance services page, analytics, i18n, embedded interactive demos. Each can be added later without restructuring.</p>
+</body>
+</html>

@@ -8,7 +8,7 @@ tech: [Go, React]
 order: 1
 ---
 ## Problem
-[SAS AI Navigator](https://www.sas.com/en_hk/software/ai-navigator.html) is a new SaaS product that gives organizations one view of their AI assets for governance and audit readiness. The schedule was tight: the whole product had to come together within a year.
+[SAS AI Navigator](https://www.sas.com/en_us/software/ai-navigator.html) is a new SaaS product that gives organizations one view of their AI assets for governance and audit readiness. The schedule was tight: the whole product had to come together within a year.
 
 ## Approach
 I worked heavily in Go and React. We used Claude agents to drive development in short cycles, kept on a tight leash by strict guidelines and rules. The engineering practices were TDD (red/green) and the backend-for-frontend (BFF) pattern.

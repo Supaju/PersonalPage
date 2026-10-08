@@ -1,0 +1,13 @@
+---
+interface Props { slug: string; title: string; summary: string; tech: string[]; demo?: string; repo?: string }
+const { slug, title, summary, tech, demo, repo } = Astro.props;
+---
+<article class="card" data-tech={tech.join('|')}>
+  <h3><a href={`/projects/${slug}/`}>{title}</a></h3>
+  <p>{summary}</p>
+  <div class="tags">{tech.map((t) => <span>{t}</span>)}</div>
+  <div class="links">
+    {demo && <a href={demo}>Live demo</a>}
+    {repo && <a href={repo}>GitHub</a>}
+  </div>
+</article>

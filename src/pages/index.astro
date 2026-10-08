@@ -15,39 +15,40 @@ const techs = [...new Set(projects.flatMap((p) => p.data.tech))].sort();
 ---
 <Base title="Your Name - Backend & Full-Stack Engineer">
   <Header />
-  <main class="wrap">
+  <main id="top" class="wrap">
     <Hero />
 
     <section id="projects" class="reveal">
-      <h2>Selected projects</h2>
+      <h2>ls projects/</h2>
       <TechFilter techs={techs} />
       <div class="grid">
         {projects.map((p) => (
-          <ProjectCard slug={p.id} title={p.data.title} summary={p.data.summary} tech={p.data.tech} demo={p.data.demo} repo={p.data.repo} />
+          <ProjectCard slug={p.id} title={p.data.title} summary={p.data.summary} tech={p.data.tech} metric={p.data.metric} image={p.data.image} demo={p.data.demo} repo={p.data.repo} />
         ))}
       </div>
     </section>
 
     <section id="work" class="reveal">
-      <h2>Professional work</h2>
-      {work.map((w) => (
-        <div class="work-item">
-          <div class="when">{w.data.period}</div>
-          <div>
-            <h3>{w.data.role}: {w.data.title}</h3>
+      <h2>git log --career</h2>
+      <div class="log">
+        {work.map((w) => (
+          <div class="commit">
+            <div class="hash">{w.data.period}</div>
+            <h3>{w.data.role}, {w.data.title}</h3>
+            {w.data.metric && <span class="callout">{w.data.metric}</span>}
             <p>{w.data.summary}</p>
             <div class="tags">{w.data.tech.map((t) => <span>{t}</span>)}</div>
-            <a href={`/work/${w.id}/`}>Read case study →</a>
+            <a class="mono" href={`/work/${w.id}/`}>read case study →</a>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </section>
 
-    <section id="about" class="reveal">
-      <h2>About</h2>
+    <section id="about" class="reveal about">
+      <h2>cat about.md</h2>
       <p>I'm a software developer who likes systems that are simple to operate and pleasant to change. I care about clear interfaces, good observability, and shipping work that people can rely on. Outside of work I build side projects and tinker with homelab infrastructure.</p>
-      <p><strong>Skills:</strong> Go, TypeScript, React, PostgreSQL, AWS, Terraform, Docker, Kubernetes.</p>
-      <p><a class="btn" href="/resume.pdf">Download résumé (PDF)</a></p>
+      <p class="mono" style="color:var(--muted);font-size:14px">skills: Go, TypeScript, React, PostgreSQL, AWS, Terraform, Docker, Kubernetes</p>
+      <p><a class="btn" href="/resume.pdf">resume.pdf</a></p>
     </section>
   </main>
   <Footer />

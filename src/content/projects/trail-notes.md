@@ -4,6 +4,7 @@ summary: Offline-first notes app with sync conflict resolution.
 tech: [React, Go]
 demo: https://example.com/trail-notes
 repo: https://github.com/example/trail-notes
+metric: works offline · CRDT sync
 order: 2
 ---
 ## Overview

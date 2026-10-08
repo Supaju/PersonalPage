@@ -4,6 +4,7 @@ role: Full-Stack Engineer
 period: 2019 - 2022
 summary: Built the real-time tracking system used by 2,000+ drivers; owned API and web dashboard.
 tech: [Node, React, AWS]
+metric: 2,000+ drivers tracked live
 order: 2
 ---
 ## Problem

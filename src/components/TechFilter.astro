@@ -1,20 +1,21 @@
 ---
 interface Props { techs: string[] }
 const { techs } = Astro.props;
+const flag = (t: string) => `--${t.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 ---
-<div class="filters" role="group" aria-label="Filter projects by technology" id="filters" hidden>
-  <button class="chip" aria-pressed="true" data-f="all">All</button>
-  {techs.map((t) => <button class="chip" aria-pressed="false" data-f={t}>{t}</button>)}
+<div class="flags" role="group" aria-label="Filter projects by technology" id="flags" hidden>
+  <button class="flag" aria-pressed="true" data-f="all">--all</button>
+  {techs.map((t) => <button class="flag" aria-pressed="false" data-f={t}>{flag(t)}</button>)}
 </div>
 <script>
-  // filters are hidden in the HTML and revealed here, so no-JS visitors see all cards and no dead buttons
-  const box = document.getElementById('filters')!;
+  // flags are hidden in the HTML and revealed here, so no-JS visitors see all panels and no dead buttons
+  const box = document.getElementById('flags')!;
   box.hidden = false;
-  const chips = box.querySelectorAll<HTMLButtonElement>('.chip');
-  const cards = document.querySelectorAll<HTMLElement>('.card[data-tech]');
-  chips.forEach((c) => c.addEventListener('click', () => {
-    chips.forEach((x) => x.setAttribute('aria-pressed', String(x === c)));
-    cards.forEach((k) => {
+  const flags = box.querySelectorAll<HTMLButtonElement>('.flag');
+  const panels = document.querySelectorAll<HTMLElement>('.panel[data-tech]');
+  flags.forEach((c) => c.addEventListener('click', () => {
+    flags.forEach((x) => x.setAttribute('aria-pressed', String(x === c)));
+    panels.forEach((k) => {
       k.hidden = c.dataset.f !== 'all' && !k.dataset.tech!.split('|').includes(c.dataset.f!);
     });
   }));

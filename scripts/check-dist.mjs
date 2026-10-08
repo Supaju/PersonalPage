@@ -18,14 +18,19 @@ assert.ok(home.includes('href="/resume.pdf"'), 'resume link missing');
 assert.ok(home.includes('href="/projects/queue-runner/"'), 'project card link missing');
 
 // tech filter must not hide anything in the static HTML (no-JS visibility)
-const cards = home.match(/<article class="card"[^>]*>/g) ?? [];
+const cards = home.match(/<article class="panel"[^>]*>/g) ?? [];
 assert.ok(cards.length >= 4, 'expected 4 project cards');
 assert.ok(cards.every((c) => !/\shidden/.test(c)), 'cards must not be pre-hidden');
 
 // a project with no demo URL must not render a dead "Live demo" link
 const infra = home.slice(home.indexOf('Infra Blueprints'), home.indexOf('Budget Board'));
-assert.ok(!infra.includes('Live demo'), 'no-demo project must not render a demo link');
-assert.ok(infra.includes('GitHub'), 'repo link missing for Infra Blueprints');
+assert.ok(!infra.includes('live demo'), 'no-demo project must not render a demo link');
+assert.ok(infra.includes('source'), 'repo link missing for Infra Blueprints');
+
+// hero text must be in the static HTML (typing is progressive enhancement)
+assert.ok(home.includes('Backend &#38; full-stack engineer') || home.includes('Backend & full-stack engineer'), 'hero tagline missing from static HTML');
+// filter flags ship hidden and are revealed by JS
+assert.ok(/id="flags"[^>]*hidden/.test(home), 'filter flags must start hidden');
 
 // work entries link to case studies
 assert.ok(home.includes('href="/work/fintech-platform/"'), 'case study link missing');
@@ -35,8 +40,8 @@ for (const p of ['projects/queue-runner', 'projects/infra-blueprints', 'work/fin
   assert.ok(exists(`${p}/index.html`), `${p} page missing`);
 }
 // repo-only project page: no dead demo link
-assert.ok(!read('projects/infra-blueprints/index.html').includes('Live demo'), 'detail page must not show a demo link');
-assert.ok(read('projects/queue-runner/index.html').includes('Live demo'), 'demo link missing on queue-runner');
+assert.ok(!read('projects/infra-blueprints/index.html').includes('live demo'), 'detail page must not show a demo link');
+assert.ok(read('projects/queue-runner/index.html').includes('live demo'), 'demo link missing on queue-runner');
 assert.ok(read('work/fintech-platform/index.html').includes('Senior Backend Engineer'), 'role missing on case study');
 
 assert.ok(exists('resume.pdf'), 'resume.pdf must ship so the button does not 404');

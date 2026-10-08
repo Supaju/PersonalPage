@@ -3,6 +3,7 @@ title: Infra Blueprints
 summary: Reusable Terraform modules for secure, cost-aware AWS stacks.
 tech: [AWS, Terraform]
 repo: https://github.com/example/infra-blueprints
+metric: 30% lower cloud spend
 order: 3
 ---
 ## Overview

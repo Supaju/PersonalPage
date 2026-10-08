@@ -1,13 +1,18 @@
 ---
-interface Props { slug: string; title: string; summary: string; tech: string[]; demo?: string; repo?: string }
-const { slug, title, summary, tech, demo, repo } = Astro.props;
+interface Props { slug: string; title: string; summary: string; tech: string[]; metric?: string; image?: string; demo?: string; repo?: string }
+const { slug, title, summary, tech, metric, image, demo, repo } = Astro.props;
 ---
-<article class="card" data-tech={tech.join('|')}>
-  <h3><a href={`/projects/${slug}/`}>{title}</a></h3>
-  <p>{summary}</p>
-  <div class="tags">{tech.map((t) => <span>{t}</span>)}</div>
-  <div class="links">
-    {demo && <a href={demo}>Live demo</a>}
-    {repo && <a href={repo}>GitHub</a>}
+<article class="panel" data-tech={tech.join('|')}>
+  <div class="bar"><i></i><i></i><i></i><span>{slug}/</span></div>
+  {image && <img class="shot" src={image} alt={`${title} screenshot`} loading="lazy">}
+  <div class="body">
+    <h3><a href={`/projects/${slug}/`}>{title}</a></h3>
+    {metric && <p class="metric">&gt; {metric}</p>}
+    <p>{summary}</p>
+    <div class="tags">{tech.map((t) => <span>{t}</span>)}</div>
+    <div class="links">
+      {demo && <a href={demo}>live demo</a>}
+      {repo && <a href={repo}>source</a>}
+    </div>
   </div>
 </article>

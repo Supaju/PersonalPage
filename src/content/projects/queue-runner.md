@@ -4,6 +4,7 @@ summary: Distributed job queue with retries, backoff and a live dashboard.
 tech: [Go, AWS, PostgreSQL]
 demo: https://example.com/queue-runner
 repo: https://github.com/example/queue-runner
+metric: 12k jobs/min · 99.98% delivered
 order: 1
 ---
 ## Overview

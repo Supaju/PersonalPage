@@ -1,10 +1,26 @@
+---
+const tagline = 'Backend & full-stack engineer. Go · AWS · PostgreSQL.';
+---
 <div class="hero reveal">
-  <h1>Hi, I'm Your Name.<br>I build reliable backends.</h1>
-  <p>Backend, cloud and full-stack engineer. I design services that scale, ship fast, and stay boring in production.</p>
+  <p class="prompt"><b>$</b> whoami</p>
+  <h1>Your Name</h1>
+  <p class="typed" id="typed" data-text={tagline}>{tagline}<span class="cursor" aria-hidden="true"></span></p>
+  <div class="status"><span class="dot"></span> open to work</div>
   <div class="btns">
-    <a class="btn primary" href="mailto:you@example.com">Email me</a>
-    <a class="btn" href="https://github.com/">GitHub</a>
-    <a class="btn" href="https://linkedin.com/">LinkedIn</a>
-    <a class="btn" href="/resume.pdf">Résumé (PDF)</a>
+    <a class="btn primary" href="mailto:you@example.com">email --me</a>
+    <a class="btn" href="https://github.com/">github</a>
+    <a class="btn" href="https://linkedin.com/">linkedin</a>
+    <a class="btn" href="/resume.pdf">resume.pdf</a>
   </div>
 </div>
+<script>
+  // full text is already in the HTML; typing is progressive enhancement
+  const el = document.getElementById('typed')!;
+  if (!matchMedia('(prefers-reduced-motion:reduce)').matches) {
+    const txt = el.dataset.text!;
+    const node = document.createTextNode('');
+    el.replaceChildren(node, el.querySelector('.cursor') ?? '');
+    let i = 0;
+    (function tick() { node.nodeValue = txt.slice(0, ++i); if (i < txt.length) setTimeout(tick, 28); })();
+  }
+</script>

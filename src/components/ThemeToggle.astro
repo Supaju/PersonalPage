@@ -2,10 +2,11 @@
 <script>
   document.getElementById('theme')!.addEventListener('click', () => {
     const d = document.documentElement;
-    const dark = d.dataset.theme
-      ? d.dataset.theme === 'dark'
-      : matchMedia('(prefers-color-scheme:dark)').matches;
-    const next = dark ? 'light' : 'dark';
+    // dark is the default; system light preference applies until the user picks
+    const light = d.dataset.theme
+      ? d.dataset.theme === 'light'
+      : matchMedia('(prefers-color-scheme:light)').matches;
+    const next = light ? 'dark' : 'light';
     d.dataset.theme = next;
     try { localStorage.setItem('theme', next); } catch {}
   });

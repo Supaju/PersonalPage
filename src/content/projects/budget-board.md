@@ -4,6 +4,7 @@ summary: Personal finance dashboard with CSV import and charts.
 tech: [React, PostgreSQL]
 demo: https://example.com/budget-board
 repo: https://github.com/example/budget-board
+metric: 50k rows imported in 2s
 order: 4
 ---
 ## Overview

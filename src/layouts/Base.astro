@@ -1,4 +1,6 @@
 ---
+import '@fontsource-variable/jetbrains-mono';
+import '@fontsource-variable/inter';
 import '../styles/global.css';
 interface Props { title: string; description?: string }
 const { title, description = 'Portfolio of Your Name: backend, cloud and full-stack engineer.' } = Astro.props;
@@ -30,6 +32,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
     }), { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    // cursor glow (CSS hides it under reduced motion)
+    addEventListener('pointermove', (e) => {
+      document.body.style.setProperty('--mx', e.clientX + 'px');
+      document.body.style.setProperty('--my', e.clientY + 'px');
+    });
   </script>
   <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 </body>

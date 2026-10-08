@@ -12,7 +12,7 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 const { title, role, period, metric, summary, tech } = entry.data;
 ---
-<Base title={`${title} - Your Name`} description={summary}>
+<Base title={`${title} - Andrew Chait`} description={summary}>
   <Header />
   <main class="wrap detail">
     <a class="back" href="/#work">← cd ..</a>
@@ -20,7 +20,7 @@ const { title, role, period, metric, summary, tech } = entry.data;
     {metric && <span class="callout">{metric}</span>}
     <p class="lead">{role} · {period}</p>
     <p>{summary}</p>
-    <div class="tags">{tech.map((t) => <span>{t}</span>)}</div>
+    {tech.length > 0 && <div class="tags">{tech.map((t) => <span>{t}</span>)}</div>}
     <Content />
   </main>
   <Footer />

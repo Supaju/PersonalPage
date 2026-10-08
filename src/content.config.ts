@@ -24,7 +24,7 @@ const work = defineCollection({
     period: z.string(),
     metric: z.string().optional(),
     summary: z.string(),
-    tech: z.array(z.string()).min(1),
+    tech: z.array(z.string()).default([]),
     order: z.number().default(0),
   }),
 });

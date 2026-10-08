@@ -14,7 +14,7 @@ order: 1
 I worked heavily in Go and React. We used Claude agents to drive development in short cycles, kept on a tight leash by strict guidelines and rules. The engineering practices were TDD (red/green) and the backend-for-frontend (BFF) pattern.
 
 ## Impact
-AI Navigator shipped to customers, launched as a new product, and is adopted internally at SAS.
+AI Navigator shipped to customers and launched as a new product.
 
 ## Filling gaps
 I've made a habit of jumping in where a team needs help. On a government-contracted health fraud, waste and abuse project, I stepped in as a tester to fill a gap and keep delivery smooth. With very little time to ramp up, I still delivered effective results.
